@@ -14,21 +14,28 @@ class Feature(GetDataframe):
         # print(real)
         return real
 
+    def symbol_leverage(self, symbol):
+        result = APICall.client.futures_change_leverage(symbol=symbol, leverage=2)
+        print(result)
+        return symbol
+
     def buy_futures_contract(self, symbol):
-        buy = input("Type 'Yes' :")
+        buy = input("Type 'Y' :")
         print(buy)
-        if buy == "Yes":
-            APICall.client.futures_create_order(symbol=symbol, side='BUY', type='MARKET', quantity=99)
+        if buy == "Y":
+            # self.symbol_leverage(symbol)
+            APICall.client.futures_create_order(symbol=symbol, side='BUY', type='MARKET', quantity=0.0001)
             print(input("Done Buying :"))
         else:
             print("Technical indicator is not right")
         return symbol
 
     def sell_futures_contract(self, symbol):
-        sell = input("Type 'Yes' :")
+        sell = input("Type 'Y' :")
         print(sell)
-        if sell == "Yes":
-            APICall.client.futures_create_order(symbol=symbol, side='SELL', type='MARKET', quantity=99)
+        if sell == "Y":
+            # self.symbol_leverage(symbol)
+            APICall.client.futures_create_order(symbol=symbol, side='SELL', type='MARKET', quantity=0.0001)
             print(input("Done Buying :"))
         else:
             print("Technical indicator is not right")
@@ -56,19 +63,23 @@ class Feature(GetDataframe):
             return num
 
         elif float(50) < float(num) < float(500):
-            num = str(num[:(num.find('.')+3)])
-            return num
-
-        elif float(5) < float(num) < float(50):
             num = str(num[:(num.find('.')+2)])
             return num
 
-        elif float(1) < float(num) < float(5):
+        elif float(5) < float(num) < float(50):
             num = str(num[:(num.find('.')+3)])
             return num
 
-        elif float(.1) < float(num) < float(1):
+        elif float(1) < float(num) < float(5):
             num = str(num[:(num.find('.')+4)])
+            return num
+
+        elif float(.5) < float(num) < float(1):
+            num = str(num[:(num.find('.')+5)])
+            return num
+
+        elif float(.1) < float(num) < float(.5):
+            num = str(num[:(num.find('.')+6)])
             return num
 
     def equal_ma(self, symbol):
@@ -78,12 +89,10 @@ class Feature(GetDataframe):
 
         ma_25 = self.moving_average(symbol, "25")
         ma_25 = str(ma_25)
-        ma_25 = str(ma_25[:(ma_25.find('.')+4)])
         ma_25 = self.rounding(num=ma_25)
 
         ma_07 = self.moving_average(symbol, "7")
         ma_07 = str(ma_07)
-        ma_07 = str(ma_07[:(ma_07.find('.')+4)])
         ma_07 = self.rounding(num=ma_07)
 
         print(f"Asset {symbol} : \n99 MA- {ma_99}\n25 MA- {ma_25}\n07 MA- {ma_07}")
@@ -97,8 +106,8 @@ class Feature(GetDataframe):
             print(f"Asset {symbol} have no position for Buy/Sell")
 
     def buying_signal(self, symbol):
-        # self.big_small_ma( symbol)
-        self.equal_ma(symbol)
+        self.big_small_ma(symbol)
+        # self.equal_ma(symbol)
         return symbol
 
 

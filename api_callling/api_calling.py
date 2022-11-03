@@ -12,13 +12,16 @@ message = f'Check you heruku for get exception .'
 
 class APICall:
     try:
-        api_key = os.environ.get('binance_api_key')
-        # api_key = os.environ.get('binance_api_key_testnet')
+        # api_key = os.environ.get('binance_api_key')
+        # api_secret = os.environ.get('binance_api_secret')
+        # client = Client(api_key, api_secret)
 
-        api_secret = os.environ.get('binance_api_secret')
-        # api_secret = os.environ.get('binance_api_secret_testnet')
+        api_key = os.environ.get('binance_api_key_testnet')
+        # print(api_key)
+        api_secret = os.environ.get('binance_api_secret_testnet')
+        # print(api_secret)
+        client = Client(api_key, api_secret, testnet=True)
 
-        client = Client(api_key, api_secret)
     except:
         sender1 = MailSender()
         sender1.login()
@@ -36,3 +39,7 @@ class APICall:
         client = Client(api_key, api_secret)
 
 
+lav = APICall().client.futures_change_leverage(symbol="BTCBUSD", leverage=5)
+print(lav)
+ord = APICall().client.futures_create_order(symbol="BTCBUSD", side='BUY', type='MARKET', quantity= 0.1)
+print(ord)
