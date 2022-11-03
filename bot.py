@@ -34,7 +34,7 @@ class Feature(GetDataframe):
             print("Technical indicator is not right")
         return symbol
 
-    def buying_signal(self, symbol):
+    def big_small_ma(self, symbol):
         if self.moving_average(symbol, "99") > self.moving_average(symbol, "25") > self.moving_average(symbol, "7"):
             print(f"Buy/Long : {symbol}")
             self.buy_futures_contract(symbol)
@@ -45,6 +45,35 @@ class Feature(GetDataframe):
             return symbol
         else:
             print(f"Asset {symbol} have no position for Buy/Sell")
+
+    def equal_ma(self, symbol):
+        ma_99 = self.moving_average(symbol, "99")
+        ma_99 = str(ma_99)
+        ma_99 = str(ma_99[:(ma_99.find('.')+4)])
+
+        ma_25 = self.moving_average(symbol, "25")
+        ma_25 = str(ma_25)
+        ma_25 = str(ma_25[:(ma_25.find('.')+4)])
+
+        ma_07 = self.moving_average(symbol, "7")
+        ma_07 = str(ma_07)
+        ma_07 = str(ma_07[:(ma_07.find('.')+4)])
+
+        print(f"Asset {symbol} : \n99 MA- {ma_99}\n25 MA- {ma_25}\n07 MA- {ma_07}")
+
+        if ma_99 == ma_25 or ma_25 == ma_07 or ma_99 == ma_07:
+            print(f"Buy 'Long'/'Short' quickly : {symbol}")
+            self.buy_futures_contract(symbol)
+            return symbol
+
+        else:
+            print(f"Asset {symbol} have no position for Buy/Sell")
+
+    def buying_signal(self, symbol):
+        # self.big_small_ma( symbol)
+        self.equal_ma(symbol)
+        return symbol
+
 
 
 import pandas as pd
@@ -57,7 +86,7 @@ feature = Feature()
 
 
 busd_symbol = ['BTCBUSD', 'ETHBUSD', 'BNBBUSD', 'ADABUSD', 'XRPBUSD', 'DOGEBUSD', 'SOLBUSD', 'FTTBUSD', 'AVAXBUSD', 'NEARBUSD', 'GMTBUSD', 'APEBUSD', 'GALBUSD', 'FTMBUSD', 'DODOBUSD', 'ANCBUSD', 'GALABUSD', 'TRXBUSD', 'DOTBUSD', 'TLMBUSD', 'ICPBUSD', 'WAVESBUSD', 'LINKBUSD', 'SANDBUSD', 'LTCBUSD', 'MATICBUSD', 'CVXBUSD', 'FILBUSD', 'LEVERBUSD', 'ETCBUSD', 'LDOBUSD', 'UNIBUSD', 'AUCTIONBUSD', 'AMBBUSD', 'PHBBUSD', 'APTBUSD']
-print(f"BUSD pairs we will buy : {len(busd_symbol)}")
+print(f"In 'BUSD' pairs we are finding : {len(busd_symbol)} Asset")
 
 
 def feature_signal():

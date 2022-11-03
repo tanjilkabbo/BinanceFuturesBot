@@ -12,8 +12,12 @@ message = f'Check you heruku for get exception .'
 
 class APICall:
     try:
-        api_key = os.environ.get('binance_api_key')
-        api_secret = os.environ.get('binance_api_secret')
+        # api_key = os.environ.get('binance_api_key')
+        api_key = os.environ.get('binance_api_key_testnet')
+
+        # api_secret = os.environ.get('binance_api_secret')
+        api_secret = os.environ.get('binance_api_secret_testnet')
+
         client = Client(api_key, api_secret)
     except:
         sender1 = MailSender()
