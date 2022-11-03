@@ -46,18 +46,45 @@ class Feature(GetDataframe):
         else:
             print(f"Asset {symbol} have no position for Buy/Sell")
 
+    def rounding(self, num):
+        if float(num) > float(10000):
+            num = str(num[:(num.find('.'))])
+            return num
+
+        elif float(500) < float(num) < float(5000):
+            num = str(num[:(num.find('.')+2)])
+            return num
+
+        elif float(50) < float(num) < float(500):
+            num = str(num[:(num.find('.')+3)])
+            return num
+
+        elif float(5) < float(num) < float(50):
+            num = str(num[:(num.find('.')+2)])
+            return num
+
+        elif float(1) < float(num) < float(5):
+            num = str(num[:(num.find('.')+3)])
+            return num
+
+        elif float(.1) < float(num) < float(1):
+            num = str(num[:(num.find('.')+4)])
+            return num
+
     def equal_ma(self, symbol):
         ma_99 = self.moving_average(symbol, "99")
         ma_99 = str(ma_99)
-        ma_99 = str(ma_99[:(ma_99.find('.')+4)])
+        ma_99 = self.rounding(num=ma_99)
 
         ma_25 = self.moving_average(symbol, "25")
         ma_25 = str(ma_25)
         ma_25 = str(ma_25[:(ma_25.find('.')+4)])
+        ma_25 = self.rounding(num=ma_25)
 
         ma_07 = self.moving_average(symbol, "7")
         ma_07 = str(ma_07)
         ma_07 = str(ma_07[:(ma_07.find('.')+4)])
+        ma_07 = self.rounding(num=ma_07)
 
         print(f"Asset {symbol} : \n99 MA- {ma_99}\n25 MA- {ma_25}\n07 MA- {ma_07}")
 
