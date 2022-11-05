@@ -1,7 +1,8 @@
 """
 Get CSV Data : https://www.cryptodatadownload.com/data/binance/
 """
-from database.connection import create_connection
+import sqlite3
+
 from dataframe.dataframe import GetDataframe
 
 total_years = 1
@@ -14,11 +15,30 @@ time_of_data = int(minute)
 
 
 data = GetDataframe().get_minute_data("BTCBUSD", 1, time_of_data)
-print(data)
+# print(data["Open"])
+open_data = data["Open"]
+for data in open_data:
+    print(data)
 
-database = r"../database/cripto.db"
+    connection = sqlite3.connect("../database/cripto.db")
+    cur = connection.cursor()
 
-# create a database connection
-conn = create_connection(database)
-with conn:
-    print("Write Panda Data here")
+    print(cur)
+
+    cur.execute(
+        "INSERT INTO btcbusd VALUES (:id, :symbol, :Open, :High, :Low,  :Close,:Volume, :Change , :Time)",
+        {
+            'id': None,
+            'symbol': "ETHBUSD",
+            'Open': data,
+            'High': None,
+            'Low': None,
+            'Close': None,
+            'Volume': None,
+            'Change': None,
+            'Time': None
+        })
+
+    connection.commit()
+    cur.close()
+
