@@ -30,7 +30,7 @@ class FindSymbols:
         # symbols = non_leverage
         symbols = non_leverage.loc[non_leverage['priceChangePercent'].astype(float) > 0]
         # print(f"{len(symbols)} symbol we are processing.")
-        # print(symbols)
+        print(symbols)
         # print(input("test pose:"))
         # return symbols.head(2)
         return symbols
