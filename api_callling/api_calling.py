@@ -39,7 +39,7 @@ class APICall:
         client = Client(api_key, api_secret)
 
 
-lav = APICall().client.futures_change_leverage(symbol="BTCBUSD", leverage=5)
-print(lav)
-ord = APICall().client.futures_create_order(symbol="BTCBUSD", side='BUY', type='MARKET', quantity= 0.1)
-print(ord)
+# lav = APICall().client.futures_change_leverage(symbol="BTCBUSD", leverage=5)
+# print(lav)
+# ord = APICall().client.futures_create_order(symbol="BTCBUSD", side='BUY', type='MARKET', quantity=0.1)
+# print(ord)
