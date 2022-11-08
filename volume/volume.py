@@ -16,9 +16,9 @@ def volume_decision(symbol):
     while good_volume:
         RealTimeData().streamKline(currency=symbol.lower(), interval="1m")
         current_price = float(RealTimeData.append_currency[-1])
-        # print(current_price)
+        print(current_price)
         volume = Volume().data_pull(symbol, 2)
-        # # print(volume)
+        # print(volume)
         # avg_price = APICall.client.get_avg_price(symbol=symbol)
         # print(avg_price['price'])
         # currant_price = float(avg_price['price'])
