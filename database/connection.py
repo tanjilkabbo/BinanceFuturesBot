@@ -1,5 +1,12 @@
+
+"""
+Base on https://www.sqlitetutorial.net/sqlite-python/
+"""
+
+
 import sqlite3
 from sqlite3 import Error
+
 
 
 def create_connection(db_file):
@@ -60,3 +67,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

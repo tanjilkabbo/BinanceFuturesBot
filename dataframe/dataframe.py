@@ -21,6 +21,7 @@ class GetDataframe:
             change = ((frame['Close'] - frame['Open']) * 100) / frame['Open']
             frame['Change'] = change
             frame['symbol'] = symbol
+            # print(frame)
             return frame
 
     def get_month_data(self, symbol, interval, lookback):
