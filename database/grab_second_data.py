@@ -1,12 +1,16 @@
 """
 Get CSV Data : https://www.cryptodatadownload.com/data/binance/
 """
+
 import sqlite3
 from datetime import datetime
 
 import pandas as pd
 
 from pandas import Timestamp
+
+
+from database.connection import create_connection
 
 from dataframe.dataframe import GetDataframe
 
@@ -21,6 +25,7 @@ time_of_data = int(minute)
 
 data = GetDataframe().get_minute_data("BTCBUSD", 1, time_of_data)
 print(data)
+
 for i in range(len(data)):
     # print(single_data)
     open_position = data['Open'].iloc[i]
@@ -55,4 +60,5 @@ for i in range(len(data)):
 
     connection.commit()
     cur.close()
+
 
