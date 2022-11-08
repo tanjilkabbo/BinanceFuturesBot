@@ -10,7 +10,7 @@ class RealTimeData:
         json_message = json.loads(message)
         current_data = json_message["k"]["c"]
         RealTimeData.append_currency.append(current_data)
-        print(current_data)
+        # print(current_data)
         ws.close()
 
     def on_error(self, ws, error):

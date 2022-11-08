@@ -1,4 +1,3 @@
-from api_callling.api_calling import APICall
 from dataframe.dataframe import GetDataframe
 from real_time_data import RealTimeData
 from playsound import playsound
@@ -30,7 +29,8 @@ def volume_decision(symbol):
         last_volume_usd = current_price * volume[-1]
         # print(last_volume_usd)
 
-        if first_volume_usd * 10 < last_volume_usd:
+        print(first_volume_usd * 4)
+        if first_volume_usd * 4 < last_volume_usd:
             print(f"Current volume {last_volume_usd} is Big volume")
             playsound('Sample.wav')
             good_volume = False
